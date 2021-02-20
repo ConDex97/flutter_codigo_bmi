@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_bmi/icon_content.dart';
+import 'package:flutter_codigo_bmi/reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const activeCardColor = Color(0xffA457BF);
@@ -23,10 +25,18 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild:
+                        IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: IconContent(
+                        text: "FEMALE", icon: FontAwesomeIcons.venus),
+                  ),
                 ),
               ],
             ),
@@ -64,32 +74,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ReusableCard extends StatelessWidget {
-  final Color color;
-  ReusableCard({@required this.color});
 
-  // const ReusableCard({
-  //   Key key,
-  // }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FaIcon(FontAwesomeIcons.venus,size:60.0),
-          SizedBox(
-            height: 7.0,
-          ),
-          Text("MALE"),
-        ],
-      ),
-    );
-  }
-}
+
