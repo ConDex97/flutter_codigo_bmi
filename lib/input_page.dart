@@ -4,6 +4,7 @@ import 'package:flutter_codigo_bmi/reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const activeCardColor = Color(0xffA457BF);
+const inactiveCardColor=Color(0xff3D3D3D);
 const bottomContainerColor = Colors.greenAccent;
 const bottomContainerHeight = 80.0;
 
@@ -13,6 +14,30 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor=inactiveCardColor;
+  Color femaleCardColor=inactiveCardColor;
+
+  void updateCardColor(int gender){
+    if(gender==1){
+      if(maleCardColor==inactiveCardColor){
+          maleCardColor=activeCardColor;
+          femaleCardColor=inactiveCardColor;
+      }
+    }
+    if(gender==2){
+      if(femaleCardColor==inactiveCardColor){
+        femaleCardColor=activeCardColor;
+        maleCardColor=inactiveCardColor;
+      }
+    }
+    setState(() {
+
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +50,29 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(
-                    color: activeCardColor,
-                    cardChild:
-                        IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
+                  child: GestureDetector(
+                    onTap: (){
+                      print("Male");
+                      updateCardColor(1);
+                    },
+                    child: ReusableCard(
+                      color: maleCardColor,
+                      cardChild:
+                          IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    color: activeCardColor,
-                    cardChild: IconContent(
-                        text: "FEMALE", icon: FontAwesomeIcons.venus),
+                  child: GestureDetector(
+                    onTap: (){
+                      print("FEMALE");
+                      updateCardColor(2);
+                    },
+                    child: ReusableCard(
+                      color: femaleCardColor,
+                      cardChild: IconContent(
+                          text: "FEMALE", icon: FontAwesomeIcons.venus),
+                    ),
                   ),
                 ),
               ],
