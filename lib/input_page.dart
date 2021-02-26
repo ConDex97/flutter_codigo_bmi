@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_bmi/constants.dart';
 import 'package:flutter_codigo_bmi/icon_content.dart';
 import 'package:flutter_codigo_bmi/reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const activeCardColor = Color(0xffA457BF);
-const inactiveCardColor=Color(0xff3D3D3D);
-const bottomContainerColor = Colors.greenAccent;
-const bottomContainerHeight = 80.0;
+
 
 
 enum Gender{
@@ -24,27 +22,9 @@ class _InputPageState extends State<InputPage> {
 
 
   Gender selectedGender;
+  int height=160;
 
-  // Color maleCardColor=inactiveCardColor;
-  // Color femaleCardColor=inactiveCardColor;
-  //
-  // void updateCardColor(Gender gender){
-  //   if(gender==Gender.male){
-  //     if(maleCardColor==inactiveCardColor){
-  //         maleCardColor=activeCardColor;
-  //         femaleCardColor=inactiveCardColor;
-  //     }
-  //   }
-  //   if(gender==Gender.female){
-  //     if(femaleCardColor==inactiveCardColor){
-  //       femaleCardColor=activeCardColor;
-  //       maleCardColor=inactiveCardColor;
-  //     }
-  //   }
-  //   setState(() {
-  //
-  //   });
-  // }
+
 
 
 
@@ -61,37 +41,29 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      print("Male");
+                  child: ReusableCard(
+                    color: selectedGender==Gender.male?activeCardColor: inactiveCardColor,
+                    cardChild:
+                        IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
+                    onPress: (){
                       selectedGender=Gender.male;
                       setState(() {
 
                       });
-                      //updateCardColor(Gender.male);
                     },
-                    child: ReusableCard(
-                      color: selectedGender==Gender.male?activeCardColor: inactiveCardColor,
-                      cardChild:
-                          IconContent(text: "MALE", icon: FontAwesomeIcons.mars),
-                    ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      print("FEMALE");
+                  child: ReusableCard(
+                    color: selectedGender==Gender.female?activeCardColor: inactiveCardColor,
+                    cardChild: IconContent(
+                        text: "FEMALE", icon: FontAwesomeIcons.venus),
+                    onPress: (){
                       selectedGender=Gender.female;
                       setState(() {
 
                       });
-                      //updateCardColor(Gender.female);
                     },
-                    child: ReusableCard(
-                      color: selectedGender==Gender.female?activeCardColor: inactiveCardColor,
-                      cardChild: IconContent(
-                          text: "FEMALE", icon: FontAwesomeIcons.venus),
-                    ),
                   ),
                 ),
               ],
@@ -101,7 +73,37 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(
+                      color: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("HEIGHT",style:labelTextStyle
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(height.toString(),style: NumberTextStyle,),
+                            Text("cm",style: labelTextStyle,),
+                          ],
+                        ),
+                        Slider(
+                          value: height.toDouble(),
+                          min: 10,
+                          max: 200,
+                          onChanged: (double value){
+                            height=value.round();
+                            print(value);
+
+                            setState(() {
+
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
