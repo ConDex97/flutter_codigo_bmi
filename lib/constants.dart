@@ -16,3 +16,8 @@ const NumberTextStyle=TextStyle(
   fontSize: 45.0,
   fontWeight: FontWeight.bold,
 );
+
+const LargeButtonTextStyle=TextStyle(
+fontSize: 30.0,
+fontWeight: FontWeight.bold,
+color: Colors.black38);

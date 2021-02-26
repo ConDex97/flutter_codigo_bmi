@@ -13,6 +13,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         primaryColor: Color(0xffA6ABAB),
         scaffoldBackgroundColor: Color(0xff3D3D3D),
+        sliderTheme: SliderTheme.of(context).copyWith(
+          activeTrackColor: Colors.greenAccent,
+          thumbColor: Colors.greenAccent,
+          overlayColor: Colors.purple.withOpacity(0.3),
+          thumbShape: RoundSliderThumbShape(
+            enabledThumbRadius: 15.0,
+          ),
+          overlayShape: RoundSliderOverlayShape(
+            overlayRadius: 20.0,
+          ),
+
+        ),
       ),
       // theme: ThemeData(
       //   primaryColor: Color(0xffFFCE3B),
